@@ -1,0 +1,101 @@
+Here's an example of a simple URL shortener service using Ruby and the Sinatra web framework:
+
+First, make sure you have the Sinatra gem installed. You can install it by running 'gem install sinatra in your command-line interface.
+
+Ruby:
+
+require 'sinatra'
+
+# In-memory data store
+URL_STORE = {}
+
+get '/' do
+  erb :index
+end
+
+post '/shorten' do
+  long_url = params[:long_url]
+
+  if valid_url?(long_url)
+    short_url = generate_short_url
+    URL_STORE[short_url] = long_url
+
+    erb :shortened, locals: { short_url: short_url }
+  else
+    erb :index, locals: { error: 'Invalid URL.' }
+  end
+end
+
+get '/:short_url' do
+  short_url = params[:short_url]
+  long_url = URL_STORE[short_url]
+
+  if long_url
+    redirect long_url
+  else
+    erb :index, locals: { error: 'Short URL not found.' }
+  end
+end
+
+helpers do
+  def generate_short_url
+    # Generate a unique short URL
+    short_url = SecureRandom.urlsafe_base64(4)
+    while URL_STORE.key?(short_url)
+      short_url = SecureRandom.urlsafe_base64(4)
+    end
+    short_url
+  end
+
+  def valid_url?(url)
+    # Simple URL validation
+    url =~ URI::DEFAULT_PARSER.make_regexp(['http', 'https'])
+  end
+end
+
+__END__
+
+@@ index
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL Shortener</title>
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <% if error %>
+      <p style="color: red;"><%= error %></p>
+    <% end %>
+    <form action="/shorten" method="post">
+      <input type="text" name="long_url" placeholder="Enter URL" required>
+      <input type="submit" value="Shorten">
+    </form>
+  </body>
+</html>
+
+@@ shortened
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL Shortened</title>
+  </head>
+  <body>
+    <h1>URL Shortened</h1>
+    <p>Your short URL: <a href="/<%= short_url %>"><%= request.base_url %>/<%= short_url %></a></p>
+  </body>
+</html>
+
+
+In this code, we're using the Sinatra web framework to handle the HTTP requests. The main functionality is implemented in the post '/shorten' route, which handles the URL shortening process.
+When a user submits a long URL, the code validates it using the valid_url? helper method and generates a unique short URL using the generate_short_url helper method. The short URL and long URL are 
+stored in the URL_STORE hash.
+
+The get '/:short_url' route is responsible for redirecting users to the original long URL when they access the short URL.
+
+The index view displays the input form for users to submit long URLs, and the shortened view shows the generated short URL to the user.
+
+To run the application, save the code in a file (e.g., app.rb) and execute the following command in the terminal:
+
+ruby app.rb
+
+This will start the application on a local server, and you can access it in your web browser by visiting http://localhost:4567.
