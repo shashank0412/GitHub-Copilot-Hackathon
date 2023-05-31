@@ -1,5 +1,10 @@
 Theme 3: Personal Finance Tracker (JavaScript)
 
+In this code, the JavaScript functions handle adding transactions, deleting transactions, and updating the transaction history and balance display. The HTML file provides the structure of the webpage, while the CSS file adds some basic styling to the elements.
+
+You can save the HTML code in an HTML file (e.g., index.html), the CSS code in a CSS file (e.g., styles.css), and the JavaScript code in a JavaScript file (e.g., script.js). Make sure all three files are in the same directory, and open the HTML file in a web browser to see the personal finance tracker in action.
+
+The tracker allows users to add income and expense transactions by entering a description, amount, and selecting the transaction type (income or expense). The transactions are displayed in a list, and the current balance is calculated and displayed at the bottom. Deleting a transaction updates the transaction history and balance accordingly.
 
 HTML :
 
