@@ -10,7 +10,11 @@ The combination of Artificial Intelligence and cloud computing is taking the wor
 You can refer the below links to know more about Github Copilot:
 
 Github Copilot
+
+
 Github Copilot Blog
+
+
 The hackathon is primarily focused on testing out the candidates on different themes leveraging the usage of the Github Copilot. There are five themes provided below and the candidates can choose to work on any of them. The preferred languages are mentioned along with the themes but the candidates are free to use the language of their choice: Java, Python, JavaScript, Ruby, .NET(C#)
 
 Theme 1: Weather Forecasting Tool (Python)
@@ -37,6 +41,8 @@ Deliverables:
 
 Presentation: It should should consist of the Business Challenge /Use Cases + Proposed Solution + High level architecture + Mention of usage of Github Copilot (Click here to download sample PPT)
 Include supporting diagrams, screenshots, if any
+
+
 Idea/Selection Criteria for the Jury:
 
 Teams/Individual can submit one or more ideas
@@ -44,6 +50,8 @@ Ideas must align with one or more hackathon themes
 Technical alignment with Microsoft Cloud Technologies and Github Copilot
 A real feasible idea that can get translated to a prototype real quick
 All artifacts including Presentation + Proposed Solution + Usage of Github Copilot +High level architecture, supporting diagrams etc. must be complete in the ideation template
+
+
 Prototyping:
 
 An appropriate name for the solution
@@ -52,6 +60,8 @@ Solution must be based on Github Copilot and clearly state how it is used in the
 Innovation Quotient
 Must have a clear roadmap and not an experimental solution
 Demonstration video of the solution explaining the working and key aspects of the solution.
+
+
 Jury criteria :
 
 Completeness
