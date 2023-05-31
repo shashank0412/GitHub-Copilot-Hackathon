@@ -1,0 +1,204 @@
+1. Set up the project structure by creating appropriate packages and classes.
+
+2. Implement the business logic for each operation, such as add product, update quantity, remove product, check availability etc., taking care not to allow invalid states such as negative quantities. You may want to use exceptions or custom exception types to handle these errors.
+
+3. Consider using design patterns where applicable, such as Singleton pattern for storing the instance of the repository class across all methods, Factory Method pattern for abstracting creation of objects based on certain criteria, Observer pattern for notifying listeners about changes made to the inventory, Decorator pattern for wrapping existing implementations with additional functionality, Command Pattern for encapsulating actions into commands
+
+
+Code  1 :
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class InventoryManagementSystem {
+    private Map<String, Integer> inventory;
+
+    public InventoryManagementSystem() {
+        inventory = new HashMap<>();
+    }
+
+    public void addProduct(String productName, int quantity) {
+        if (inventory.containsKey(productName)) {
+            int currentQuantity = inventory.get(productName);
+            inventory.put(productName, currentQuantity + quantity);
+            System.out.println("Product added successfully.");
+        } else {
+            inventory.put(productName, quantity);
+            System.out.println("Product added successfully.");
+        }
+    }
+
+    public void updateProduct(String productName, int quantity) {
+        if (inventory.containsKey(productName)) {
+            inventory.put(productName, quantity);
+            System.out.println("Product updated successfully.");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+
+    public void removeProduct(String productName) {
+        if (inventory.containsKey(productName)) {
+            inventory.remove(productName);
+            System.out.println("Product removed successfully.");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+
+    public void checkStock(String productName) {
+        if (inventory.containsKey(productName)) {
+            int quantity = inventory.get(productName);
+            System.out.println("Available stock for " + productName + ": " + quantity);
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+
+    public static void main(String[] args) {
+        InventoryManagementSystem inventorySystem = new InventoryManagementSystem();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("1. Add product");
+            System.out.println("2. Update product");
+            System.out.println("3. Remove product");
+            System.out.println("4. Check stock");
+            System.out.println("5. Quit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter product name: ");
+                    String productName = scanner.next();
+                    System.out.print("Enter quantity: ");
+                    int quantity = scanner.nextInt();
+                    inventorySystem.addProduct(productName, quantity);
+                    break;
+                case 2:
+                    System.out.print("Enter product name: ");
+                    productName = scanner.next();
+                    System.out.print("Enter quantity: ");
+                    quantity = scanner.nextInt();
+                    inventorySystem.updateProduct(productName, quantity);
+                    break;
+                case 3:
+                    System.out.print("Enter product name: ");
+                    productName = scanner.next();
+                    inventorySystem.removeProduct(productName);
+                    break;
+                case 4:
+                    System.out.print("Enter product name: ");
+                    productName = scanner.next();
+                    inventorySystem.checkStock(productName);
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+}
+
+
+
+
+Code 2:
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class InventoryManagementSystem {
+
+    private Connection connection;
+
+    public InventoryManagementSystem(Connection connection) {
+        this.connection = connection;
+    }
+
+    public List<Product> getProducts() throws SQLException {
+        List<Product> products = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM products");
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Product product = new Product();
+            product.setId(resultSet.getInt("id"));
+            product.setName(resultSet.getString("name"));
+            product.setQuantity(resultSet.getInt("quantity"));
+            products.add(product);
+        }
+
+        return products;
+    }
+
+    public Product getProductById(int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM products WHERE id = ?");
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            Product product = new Product();
+            product.setId(resultSet.getInt("id"));
+            product.setName(resultSet.getString("name"));
+            product.setQuantity(resultSet.getInt("quantity"));
+            return product;
+        } else {
+            return null;
+        }
+    }
+
+    public void addProduct(Product product) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO products (name, quantity) VALUES (?, ?)");
+        statement.setString(1, product.getName());
+        statement.setInt(2, product.getQuantity());
+        statement.executeUpdate();
+    }
+
+    public void updateProduct(Product product) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE products SET name = ?, quantity = ? WHERE id = ?");
+        statement.setString(1, product.getName());
+        statement.setInt(2, product.getQuantity());
+        statement.setInt(3, product.getId());
+        statement.executeUpdate();
+    }
+
+    public void deleteProduct(int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM products WHERE id = ?");
+        statement.setInt(1, id);
+        statement.executeUpdate();
+    }
+
+    public int getQuantity(int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT quantity FROM products WHERE id = ?");
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("quantity");
+        } else {
+            return 0;
+        }
+    }
+
+    public void updateQuantity(int id, int quantity) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE products SET quantity = ? WHERE id = ?");
+        statement.setInt(1, quantity);
+        statement.setInt(2, id);
+        statement.executeUpdate();
+    }
+}
+
