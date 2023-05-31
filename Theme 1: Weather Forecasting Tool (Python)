@@ -1,0 +1,47 @@
+1. Import necessary libraries at the beginning of the file:
+
+    import requests
+    from bs4 import BeautifulSoup
+    import argparse
+    # Define URL endpoint for openweathermap api
+    url = "https://api.openweathermap.org/data/2.5/weather?"
+
+
+2. Create a function `get_weather` which takes two arguments - location(city name or zipcode) and units(`metric`,`imperial`) as input parameters :
+
+   def get_weather(location,units):
+        pass
+
+3. Inside this function define query parameter dictionary including 'q' key representing location, 'appid' representing apikey,and 'units':
+
+
+
+
+
+Code:
+
+import requests
+import json
+
+API_KEY = "API_KEY = "YOUR_ACTUAL_API_KEY"
+
+def get_weather(city):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        weather = data["weather"][0]["main"]
+        temperature = data["main"]["temp"]
+        humidity = data["main"]["humidity"]
+        wind_speed = data["wind"]["speed"]
+
+        print(f"Weather in {city}: {weather}")
+        print(f"Temperature: {temperature}°C")
+        print(f"Humidity: {humidity}%")
+        print(f"Wind Speed: {wind_speed} m/s")
+    else:
+        print("Failed to retrieve weather data.")
+
+city_name = input("Enter the city name: ")
+get_weather(city_name)
