@@ -3,6 +3,8 @@ Microsoft GitHub Copilot Hackathon
 
 
 GitHub Copilot Problem Statement
+
+
 The combination of Artificial Intelligence and cloud computing is taking the world by storm. To match up the fast pace requirements of the industry, new tools are emerging for the ease of development and understanding. Microsoft understands the needs of the hour and have developed Github Copilot. With the help of the Github Copilot, the developers can speedup their work with more accuracy and correctness and more available alternatives.
 
 You can refer the below links to know more about Github Copilot:
