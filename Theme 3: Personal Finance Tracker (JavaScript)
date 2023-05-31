@@ -1,1 +1,67 @@
 
+To create a web-based personal finance tracker using JavaScript, HTML, and CSS, follow these general steps:
+
+Start by setting up the project directory and files, including the index.html page, style sheet (style.css), and script file (script.js).
+
+Design the layout of the pages using HTML elements, such as headers, paragraphs, forms, tables, and buttons.
+
+Add styles to customize the appearance of the pages through the stylesheet (.css) file. This includes colors, fonts, margins, padding, and other properties related to the presentation of content.
+
+Write the interactive behavior of the pages using JavaScript within the script file (.js). This will involve manipulating DOM elements, listening for events, and responding to them dynamically.
+
+
+Code :
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Personal Finance Tracker</h1>
+        <div id="transactions">
+            <h2>Transactions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-05-31</td>
+                        <td>Income</td>
+                        <td>$100</td>
+                    </tr>
+                    <tr>
+                        <td>2023-05-30</td>
+                        <td>Expense</td>
+                        <td>$50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="balance">
+            <h2>Balance</h2>
+            <p>$150</p>
+        </div>
+        <div id="add-transaction">
+            <h2>Add Transaction</h2>
+            <form action="#">
+                <input type="date" name="date">
+                <input type="radio" name="type" value="income"> Income
+                <input type="radio" name="type" value="expense"> Expense
+                <input type="number" name="amount">
+                <button type="submit">Add Transaction</button>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
