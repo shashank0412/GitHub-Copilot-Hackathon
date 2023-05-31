@@ -7,6 +7,11 @@
 
 Code  1 :
 
+This code defines an InventoryManagementSystem class that manages the inventory using a HashMap to store the product names as keys and their corresponding quantities as values. It provides methods for adding, updating, removing, and checking the stock of products.
+
+In the main method, a simple menu-driven interface is implemented using a Scanner to read user input and perform the desired operations.
+
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
