@@ -155,4 +155,16 @@ function updateBalance() {
         .reduce((total, transaction) => total + transaction.amount, 0);
 
     const expenses = transactions
-        .filter(transaction => transaction.type === 'expense
+        .filter(transaction => transaction.type === 'expense')
+        .reduce((total, transaction) => total + transaction.amount, 0);
+
+    balance = income - expenses;
+
+    const balanceElement = document.getElementById('balance');
+    balanceElement.textContent = balance;
+    balanceElement.className = balance >= 0 ? 'income' : 'expense';
+}
+
+function generateID() {
+    return '_' + Math.random().toString(36).substr(2, 9);
+}
