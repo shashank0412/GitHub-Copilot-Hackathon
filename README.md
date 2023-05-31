@@ -46,25 +46,38 @@ Include supporting diagrams, screenshots, if any
 Idea/Selection Criteria for the Jury:
 
 Teams/Individual can submit one or more ideas
+
 Ideas must align with one or more hackathon themes
+
 Technical alignment with Microsoft Cloud Technologies and Github Copilot
+
 A real feasible idea that can get translated to a prototype real quick
+
 All artifacts including Presentation + Proposed Solution + Usage of Github Copilot +High level architecture, supporting diagrams etc. must be complete in the ideation template
 
 
 Prototyping:
 
 An appropriate name for the solution
+
 Solution must be a working prototype supported by slides with a full blown architecture
+
 Solution must be based on Github Copilot and clearly state how it is used in the solution
+
 Innovation Quotient
+
 Must have a clear roadmap and not an experimental solution
+
 Demonstration video of the solution explaining the working and key aspects of the solution.
 
 
 Jury criteria :
 
 Completeness
+
 Correctness & Performance
+
 Usage of the Github Copilot and Microsoft related technologies
+
 Innovation and Design
+
