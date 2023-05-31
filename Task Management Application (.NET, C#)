@@ -1,0 +1,172 @@
+In this code, the TaskManagementApp class serves as the main entry point of the application. It provides a menu-driven interface for users to interact with the task management features.
+
+The Task class represents a task with properties for the task name and completion status.
+
+The application allows users to perform the following operations:
+
+1. Add Task: Prompts the user to enter a task name and adds the task to the list of tasks.
+2. Update Task: Prompts the user to enter the index of the task to update and the new task name. If the index is valid, the task's name is updated.
+3. Delete Task: Prompts the user to enter the index of the task to delete. If the index is valid, the task is removed from the list of tasks.
+4. Mark Task as Completed: Prompts the user to enter the index of the task to mark as completed. If the index is valid, the task's completion status is set to true.
+5. View All Tasks: Displays a list of all tasks, showing their indices, completion status, and names.
+6. Exit: Exits the application.
+
+You can run this code in a .NET Framework environment, such as Visual Studio or the .NET command-line interface.
+
+Here's an example of a basic task management application using C# and .NET Framework:
+
+C# :
+
+
+using System;
+using System.Collections.Generic;
+
+namespace TaskManagementApp
+{
+    class Program
+    {
+        static List<Task> tasks = new List<Task>();
+
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.WriteLine("Task Management Application");
+                Console.WriteLine("---------------------------");
+                Console.WriteLine("1. Add Task");
+                Console.WriteLine("2. Update Task");
+                Console.WriteLine("3. Delete Task");
+                Console.WriteLine("4. Mark Task as Completed");
+                Console.WriteLine("5. View All Tasks");
+                Console.WriteLine("6. Exit");
+                Console.Write("Enter your choice: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        AddTask();
+                        break;
+                    case "2":
+                        UpdateTask();
+                        break;
+                    case "3":
+                        DeleteTask();
+                        break;
+                    case "4":
+                        MarkTaskAsCompleted();
+                        break;
+                    case "5":
+                        ViewAllTasks();
+                        break;
+                    case "6":
+                        Console.WriteLine("Exiting...");
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        static void AddTask()
+        {
+            Console.WriteLine("Add Task");
+            Console.WriteLine("--------");
+            Console.Write("Enter task name: ");
+            string name = Console.ReadLine();
+
+            Task newTask = new Task(name);
+            tasks.Add(newTask);
+
+            Console.WriteLine("Task added successfully.");
+        }
+
+        static void UpdateTask()
+        {
+            Console.WriteLine("Update Task");
+            Console.WriteLine("-----------");
+            Console.Write("Enter task index: ");
+            int index = int.Parse(Console.ReadLine());
+
+            if (index >= 0 && index < tasks.Count)
+            {
+                Task task = tasks[index];
+
+                Console.Write("Enter new task name: ");
+                string newName = Console.ReadLine();
+
+                task.Name = newName;
+
+                Console.WriteLine("Task updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid task index.");
+            }
+        }
+
+        static void DeleteTask()
+        {
+            Console.WriteLine("Delete Task");
+            Console.WriteLine("-----------");
+            Console.Write("Enter task index: ");
+            int index = int.Parse(Console.ReadLine());
+
+            if (index >= 0 && index < tasks.Count)
+            {
+                tasks.RemoveAt(index);
+                Console.WriteLine("Task deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid task index.");
+            }
+        }
+
+        static void MarkTaskAsCompleted()
+        {
+            Console.WriteLine("Mark Task as Completed");
+            Console.WriteLine("----------------------");
+            Console.Write("Enter task index: ");
+            int index = int.Parse(Console.ReadLine());
+
+            if (index >= 0 && index < tasks.Count)
+            {
+                Task task = tasks[index];
+                task.Completed = true;
+                Console.WriteLine("Task marked as completed.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid task index.");
+            }
+        }
+
+        static void ViewAllTasks()
+        {
+            Console.WriteLine("All Tasks");
+            Console.WriteLine("---------");
+
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                Task task = tasks[i];
+                Console.WriteLine($"{i}. [{(task.Completed ? "X" : " ")}] {task.Name}");
+            }
+        }
+    }
+
+    class Task
+    {
+        public string Name { get; set; }
+        public bool Completed { get; set; }
+
+        public Task(string name)
+        {
+            Name = name;
+            Completed = false;
+        }
+    }
+}
